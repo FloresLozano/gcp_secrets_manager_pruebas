@@ -1,0 +1,11 @@
+include README.md
+include LICENSE
+include CHANGELOG.md
+include requirements.txt
+include requirements-dev.txt
+recursive-include gcp_secrets_manager *.py
+recursive-include docs *.rst *.md
+recursive-exclude tests *
+recursive-exclude examples *
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]

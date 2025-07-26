@@ -1,0 +1,20 @@
+# Incluir las dependencias base
+-r requirements.txt
+
+# Herramientas de desarrollo
+pytest>=7.0.0
+pytest-cov>=4.0.0
+pytest-asyncio>=0.21.0
+black>=23.0.0
+flake8>=6.0.0
+mypy>=1.0.0
+isort>=5.12.0
+
+# Herramientas de documentación
+sphinx>=6.0.0
+sphinx-rtd-theme>=1.2.0
+
+# Herramientas de empaquetado
+build>=0.10.0
+twine>=4.0.0
+wheel>=0.40.0

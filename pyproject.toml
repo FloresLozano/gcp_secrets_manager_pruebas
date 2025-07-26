@@ -1,0 +1,101 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gcp-secrets-manager"
+version = "0.1.0"
+description = "Gestor profesional de secretos para Google Cloud Platform con caché y validación"
+readme = "README.md"
+authors = [
+    {name = "cloud department", email = "cloud department"}
+]
+license = {text = "MIT"}
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Security",
+    "Topic :: System :: Systems Administration",
+]
+keywords = ["google-cloud", "secrets", "secret-manager", "gcp", "cloud", "security"]
+dependencies = [
+    "google-cloud-secret-manager>=2.16.0",
+    "google-auth>=2.16.0",
+]
+requires-python = ">=3.8"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "pytest-asyncio>=0.21.0",
+    "black>=23.0",
+    "flake8>=6.0",
+    "mypy>=1.0",
+    "isort>=5.12",
+]
+docs = [
+    "sphinx>=6.0",
+    "sphinx-rtd-theme>=1.2",
+]
+
+[project.urls]
+Homepage = "https://github.com/tunombre/gcp-secrets-manager"
+Documentation = "https://gcp-secrets-manager.readthedocs.io"
+Repository = "https://github.com/tunombre/gcp-secrets-manager.git"
+"Bug Tracker" = "https://github.com/tunombre/gcp-secrets-manager/issues"
+Changelog = "https://github.com/tunombre/gcp-secrets-manager/blob/main/CHANGELOG.md"
+
+[project.scripts]
+gcp-secrets-cli = "gcp_secrets_manager.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["gcp_secrets_manager*"]
+exclude = ["tests*", "docs*", "examples*"]
+
+[tool.black]
+line-length = 100
+target-version = ["py38", "py39", "py310", "py311", "py312"]
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+line_length = 100
+multi_line_output = 3
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --cov=gcp_secrets_manager --cov-report=html --cov-report=term"
+
+[tool.coverage.run]
+source = ["gcp_secrets_manager"]
+omit = ["*/tests/*", "*/examples/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+]
