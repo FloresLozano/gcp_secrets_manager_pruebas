@@ -12,16 +12,16 @@ with open("requirements.txt", "r", encoding="utf-8") as fh:
 setup(
     name="gcp-secrets-manager",
     version="0.1.0",
-    author="Tu Nombre",
-    author_email="tu.email@example.com",
+    author="cloud department",
+    author_email="cloud department",
     description="Gestor profesional de secretos para Google Cloud Platform",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/tunombre/gcp-secrets-manager",
+    url="https://github.com/FloresLozano/gcp_secrets_manager_pruebas.git",
     project_urls={
-        "Bug Tracker": "https://github.com/tunombre/gcp-secrets-manager/issues",
+        "Bug Tracker": "https://github.com/FloresLozano/gcp_secrets_manager_pruebas.git/issues",
         "Documentation": "https://gcp-secrets-manager.readthedocs.io",
-        "Source Code": "https://github.com/tunombre/gcp-secrets-manager",
+        "Source Code": "https://github.com/FloresLozano/gcp_secrets_manager_pruebas.git",
     },
     packages=find_packages(exclude=["tests*", "examples*", "docs*"]),
     classifiers=[
@@ -34,8 +34,17 @@ setup(
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
         "Operating System :: OS Independent",
     ],
+    extras_require={
+        "dev": [
+            "pytest",
+            "pytest-cov",
+            "black",
+            "mypy",
+        ]
+    },
     python_requires=">=3.8",
     install_requires=requirements,
     entry_points={

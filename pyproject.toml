@@ -7,10 +7,12 @@ name = "gcp-secrets-manager"
 version = "0.1.0"
 description = "Gestor profesional de secretos para Google Cloud Platform con caché y validación"
 readme = "README.md"
-authors = [
-    {name = "cloud department", email = "cloud department"}
-]
+requires-python = ">=3.8"
 license = {text = "MIT"}
+authors = [
+    {name = "Cloud Department", email = "cloud@yourcompany.com"}
+]
+keywords = ["google-cloud", "secrets", "secret-manager", "gcp", "cloud", "security"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
@@ -26,12 +28,10 @@ classifiers = [
     "Topic :: Security",
     "Topic :: System :: Systems Administration",
 ]
-keywords = ["google-cloud", "secrets", "secret-manager", "gcp", "cloud", "security"]
 dependencies = [
     "google-cloud-secret-manager>=2.16.0",
-    "google-auth>=2.16.0",
+    "google-auth>=2.16.0"
 ]
-requires-python = ">=3.8"
 
 [project.optional-dependencies]
 dev = [
@@ -41,19 +41,19 @@ dev = [
     "black>=23.0",
     "flake8>=6.0",
     "mypy>=1.0",
-    "isort>=5.12",
+    "isort>=5.12"
 ]
 docs = [
     "sphinx>=6.0",
-    "sphinx-rtd-theme>=1.2",
+    "sphinx-rtd-theme>=1.2"
 ]
 
 [project.urls]
-Homepage = "https://github.com/tunombre/gcp-secrets-manager"
+Homepage = "https://github.com/FloresLozano/gcp_secrets_manager_pruebas"
 Documentation = "https://gcp-secrets-manager.readthedocs.io"
-Repository = "https://github.com/tunombre/gcp-secrets-manager.git"
-"Bug Tracker" = "https://github.com/tunombre/gcp-secrets-manager/issues"
-Changelog = "https://github.com/tunombre/gcp-secrets-manager/blob/main/CHANGELOG.md"
+Repository = "https://github.com/FloresLozano/gcp_secrets_manager_pruebas.git"
+"Bug Tracker" = "https://github.com/FloresLozano/gcp_secrets_manager_pruebas/issues"
+Changelog = "https://github.com/FloresLozano/gcp_secrets_manager_pruebas/blob/main/CHANGELOG.md"
 
 [project.scripts]
 gcp-secrets-cli = "gcp_secrets_manager.cli:main"
@@ -97,5 +97,5 @@ exclude_lines = [
     "raise AssertionError",
     "raise NotImplementedError",
     "if __name__ == .__main__.:",
-    "if TYPE_CHECKING:",
+    "if TYPE_CHECKING:"
 ]
