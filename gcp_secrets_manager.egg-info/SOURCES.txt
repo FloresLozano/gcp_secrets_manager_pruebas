@@ -8,6 +8,9 @@ requirements.txt
 setup.py
 docs/api_reference.md
 docs/installation.md
+docs/source/api.rst
+docs/source/index.rst
+docs/source/usage.rst
 gcp_secrets_manager/__init__.py
 gcp_secrets_manager/auth.py
 gcp_secrets_manager/cache.py

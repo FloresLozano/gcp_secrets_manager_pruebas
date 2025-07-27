@@ -67,6 +67,76 @@ line-length = 100
 target-version = ["py38", "py39", "py310", "py311", "py312"]
 include = '\.pyi?$'
 
+[tool.tox]
+legacy_tox_ini = false
+
+[tool.tox.options]
+skip_missing_interpreters = true
+env_list = [
+    "py38", "py39", "py310", "py311", "py312",
+    "lint", "typecheck", "docs"
+]
+
+[[tool.tox.envs.py38]]
+basepython = "python3.8"
+deps = ["pytest", "pytest-cov"]
+commands = [
+    "pytest -v --cov=gcp_secrets_manager --cov-report=term-missing"
+]
+
+[[tool.tox.envs.py39]]
+basepython = "python3.9"
+deps = ["pytest", "pytest-cov"]
+commands = [
+    "pytest -v --cov=gcp_secrets_manager --cov-report=term-missing"
+]
+
+[[tool.tox.envs.py310]]
+basepython = "python3.10"
+deps = ["pytest", "pytest-cov"]
+commands = [
+    "pytest -v --cov=gcp_secrets_manager --cov-report=term-missing"
+]
+
+[[tool.tox.envs.py311]]
+basepython = "python3.11"
+deps = ["pytest", "pytest-cov"]
+commands = [
+    "pytest -v --cov=gcp_secrets_manager --cov-report=term-missing"
+]
+
+[[tool.tox.envs.py312]]
+basepython = "python3.12"
+deps = ["pytest", "pytest-cov"]
+commands = [
+    "pytest -v --cov=gcp_secrets_manager --cov-report=term-missing"
+]
+
+[[tool.tox.envs.lint]]
+description = "Run flake8 for linting"
+basepython = "python3.12"
+deps = ["flake8>=6.0"]
+commands = ["flake8 gcp_secrets_manager tests"]
+
+[[tool.tox.envs.typecheck]]
+description = "Run mypy for static type checking"
+basepython = "python3.12"
+deps = ["mypy>=1.0"]
+commands = ["mypy gcp_secrets_manager"]
+
+[[tool.tox.envs.docs]]
+description = "Build Sphinx documentation"
+basepython = "python3.12"
+deps = [
+    "sphinx>=6.0",
+    "sphinx-rtd-theme>=1.2",
+    "myst-parser>=1.0"
+]
+commands = [
+    "sphinx-build -W -b html -d {envtmpdir}/doctrees docs/source {envtmpdir}/html"
+]
+
+
 [tool.isort]
 profile = "black"
 line_length = 100
