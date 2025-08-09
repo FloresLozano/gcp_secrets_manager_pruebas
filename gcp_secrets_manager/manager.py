@@ -33,7 +33,7 @@ class StandardSecretsManager:
         self.sm_client = SecretManagerWithCache(project_id, cache_ttl_seconds)
         logger.info(f"StandardSecretsManager inicializado para proyecto: {project_id}")
         if not secure_mode:
-            logger.warning("⚠️  Modo inseguro activado - los secretos se retornarán como strings")
+            logger.warning("  Modo inseguro activado - los secretos se retornarán como strings")
 
     def _wrap_secret(self, value: Optional[str], name: str = "secret") -> Union[Optional[str], SecureSecret]:
         """Envuelve el valor en SecureSecret si está en modo seguro, de lo contrario devuelve el valor."""
@@ -260,6 +260,13 @@ class StandardSecretsManager:
         """
         value = self.sm_client.get_secret(secret_name, validate_name=validate_format)
         return self._wrap_secret(value, secret_name)
+
+    def get_secret(self, secret_name: str, validate_format: bool = True) -> Union[Optional[str], SecureSecret]:
+        """Alias de conveniencia para get_custom_secret.
+
+        Mantiene el mismo comportamiento respecto a validación y secure_mode.
+        """
+        return self.get_custom_secret(secret_name, validate_format=validate_format)
 
     def get_multiple_custom_secrets(
         self, secret_names: List[str], validate_format: bool = True

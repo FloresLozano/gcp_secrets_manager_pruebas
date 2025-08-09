@@ -62,10 +62,13 @@ gcp-secrets-cli = "gcp_secrets_manager.cli:main"
 include = ["gcp_secrets_manager*"]
 exclude = ["tests*", "docs*", "examples*"]
 
+[tool.setuptools.package-data]
+gcp_secrets_manager = ["py.typed"]
+
 [tool.black]
 line-length = 100
 target-version = ["py38", "py39", "py310", "py311", "py312"]
-include = '\.pyi?$'
+include = '\\.pyi?$'
 
 [tool.tox]
 legacy_tox_ini = false

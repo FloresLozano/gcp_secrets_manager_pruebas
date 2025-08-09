@@ -29,6 +29,14 @@ class SecretNameValidator:
         "mts-secrets-data",
     }
 
+    # Precompilación del patrón para rendimiento y para evitar identificadores inválidos
+    # Identificador: alfanumérico con segmentos separados por un solo '-' o '_',
+    # sin comenzar ni terminar con separadores.
+    _VALID_TYPES_RE = "|".join(VALID_TYPES)
+    _VALID_DATA_TYPES_RE = "|".join(VALID_DATA_TYPES)
+    _IDENTIFIER_RE = r"(?:[a-z0-9]+(?:[-_][a-z0-9]+)*)"
+    _PATTERN = re.compile(rf"^({_VALID_TYPES_RE})-({_IDENTIFIER_RE})-({_VALID_DATA_TYPES_RE})$")
+
     @classmethod
     def validate(cls, secret_name: str) -> bool:
         """
@@ -44,15 +52,13 @@ class SecretNameValidator:
             logger.debug(f"Secreto '{secret_name}' es legacy. Validación omitida.")
             return True
 
-        valid_types_re = "|".join(cls.VALID_TYPES)
-        valid_data_types_re = "|".join(cls.VALID_DATA_TYPES)
-        pattern = rf"^({valid_types_re})-([a-z0-9_-]+?)-({valid_data_types_re})$"
-
-        if not re.match(pattern, secret_name):
-            logger.error(f"ERROR DE FORMATO: El secreto '{secret_name}' no sigue la convención.")
-            logger.error(f"Formato esperado: {{tipo}}-{{identificador}}-{{tipo_dato}}")
-            logger.error(f"Tipos válidos: {cls.VALID_TYPES}")
-            logger.error(f"Tipos de dato válidos: {cls.VALID_DATA_TYPES}")
+        if not cls._PATTERN.match(secret_name):
+            # Para rendimiento evitamos log costoso en masa; solo en DEBUG
+            if logger.isEnabledFor(logging.DEBUG):
+                logger.debug("ERROR DE FORMATO: El secreto '%s' no sigue la convención.", secret_name)
+                logger.debug("Formato esperado: {tipo}-{identificador}-{tipo_dato}")
+                logger.debug("Tipos válidos: %s", cls.VALID_TYPES)
+                logger.debug("Tipos de dato válidos: %s", cls.VALID_DATA_TYPES)
             return False
 
         logger.debug(f"El formato del secreto '{secret_name}' es válido.")
