@@ -1,2 +1,0 @@
-[console_scripts]
-gcp-secrets-cli = gcp_secrets_manager.cli:main
